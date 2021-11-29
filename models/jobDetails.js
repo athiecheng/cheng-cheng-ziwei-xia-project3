@@ -1,6 +1,4 @@
-const { boolean } = require("webidl-conversions");
-
-const mongoose = requre('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
@@ -14,4 +12,4 @@ const JobDetailsSchema = new Schema({
     favorited: Number
 })
 
-module.exports = mongoose.model('JobDetails', JobDetailsSchema)
+module.exports = mongoose.model('JobDetail', JobDetailsSchema)
