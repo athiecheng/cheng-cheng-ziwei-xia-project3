@@ -10,5 +10,17 @@
 <body>
     <h1><%=job.title %></h1>
     <h2><%=job.location %></h2>
+    <p>
+      <a href="/jobs/<%=job._id%>/edit">edit</a>
+    </p>
+    <p>
+      <form action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+      </form>
+    </p>
+    <footer>
+      
+      <a href="/jobs">All jobs</a>
+    </footer>
 </body>
 </html>
