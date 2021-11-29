@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const JobDetails = require('./models/jobDetails');
 
 mongoose.connect('mongodb://localhost:27017/job-search', {
     useNewUrlParser: true,
@@ -21,6 +22,15 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.get('/', (req, res) =>{
     res.render('home')
+})
+
+app.get('/job-details', async (req, res) => {
+    const job = new JobDetails({
+        title : 'Software Engineer',
+        company: 'Facebook'
+    });
+    await job.save();
+    res.send(job)
 })
 
 app.listen(3000, ()=> {

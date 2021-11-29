@@ -10,8 +10,8 @@ const JobDetailsSchema = new Schema({
     location: String,
     description: String,
     employerEmail: String,
-    postingDate: String, 
-    favorited: boolean
+    postingDate: Number, 
+    favorited: Number
 })
 
 module.exports = mongoose.model('JobDetails', JobDetailsSchema)
