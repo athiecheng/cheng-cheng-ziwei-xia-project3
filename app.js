@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+
 const JobDetail = require('./models/jobDetails');
 
 mongoose.connect('mongodb://localhost:27017/job-search', {
@@ -15,6 +16,7 @@ db.once("open", ()=> {
 })
 
 const app = express();
+
 
 
 app.set('view engine', 'ejs');
