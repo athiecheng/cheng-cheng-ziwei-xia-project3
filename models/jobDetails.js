@@ -7,7 +7,7 @@ const JobDetailsSchema = new Schema({
     company: String,
     location: String,
     description: String,
-    employerEmail: String,
+    email: String,
     postingDate: Number, 
     favorited: Number
 })

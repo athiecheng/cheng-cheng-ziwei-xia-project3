@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-</head>
-
-<body>
-    <h1><%=job.title %></h1>
-    <h2><%=job.location %></h2>
+<% layout('layouts/boilerplate')%>
+    <h1> Job Title: <%=job.title %></h1>
+    <h2>Job Location: <%=job.location %></h2>
+    <h2>Company Name: <%=job.company %></h2>
+    <h2>Contact Email: <%=job.email %></h2>
+    <h3>Job Description: <%=job.description %></h3>
+    
+    
     <p>
       <a href="/jobs/<%=job._id%>/edit">edit</a>
     </p>
     <p>
       <form action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
-        <button>Delete</button>
+        <button>Delete this job</button>
       </form>
     </p>
     <footer>
       
       <a href="/jobs">All jobs</a>
     </footer>
-</body>
-</html>

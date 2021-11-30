@@ -1,28 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post a Job</title>
-</head>
-
-<body>
+<% layout('layouts/boilerplate')%>
     <form action="/jobs" method = "POST">
         <div>
-            <label for = "title">Title</label>
+            <label for = "title">Job Title</label>
             <input type="text" id = "title" name = "job[title]">
         </div>
+
         <div>
-            <label for = "company">Company</label>
+            <label for = "company">Company Name</label>
             <input type="text" id = "company" name = "job[company]">
         </div>
+
         <div>
             <label for = "location">Location</label>
             <input type="text" id = "location" name = "job[location]">
         </div>
-        <button>Add Campground</button>
+
+        <div>
+            <label for = "Contact Email">Contact Email</label>
+            <input type="text" id = "email" name = "job[email]">
+        </div>
+
+        <div>
+            <label for = "Job description">Job Description</label>
+            <input type="text" id = "description" name = "job[description]">
+        </div>
+
+        
+
+      
+        <button>Post This Job</button>
     </form>
     <a href="/jobs">All jobs</a>
-</body>
-</html>

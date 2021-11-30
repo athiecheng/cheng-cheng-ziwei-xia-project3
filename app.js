@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsmate = require('ejs-mate');
 const methodOverride = require('method-override');
 const JobDetail = require('./models/jobDetails');
 
@@ -17,7 +18,7 @@ db.once("open", ()=> {
 
 const app = express();
 
-
+app.engine('ejs',ejsmate);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -66,6 +67,6 @@ app.delete('/jobs/:id', async (req, res) => {
     res.redirect('/jobs')
 })
 
-app.listen(3000, ()=> {
+app.listen(3001, ()=> {
     console.log('Serving on port 3000')
 })
