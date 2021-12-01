@@ -1,20 +1,23 @@
 <% layout('layouts/boilerplate')%>
-    <h1> Job Title: <%=job.title %></h1>
-    <h2>Job Location: <%=job.location %></h2>
-    <h2>Company Name: <%=job.company %></h2>
-    <h2>Contact Email: <%=job.email %></h2>
-    <h3>Job Description: <%=job.description %></h3>
-    
-    
-    <p>
-      <a href="/jobs/<%=job._id%>/edit">edit</a>
-    </p>
-    <p>
-      <form action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
-        <button>Delete this job</button>
-      </form>
-    </p>
-    <footer>
-      
-      <a href="/jobs">All jobs</a>
-    </footer>
+
+<div class="card" >
+  <img src="<%= job.logo%>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"> <%=job.title %></h5>
+    <p class="card-text"><%=job.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-muted"><%=job.location %></li>
+    <li class="list-group-item "><%=job.company %></li>
+    <li class="list-group-item "><%=job.email %></li>
+  </ul>
+
+  <div class="card-body">
+    <a class="card-link btn btn-warning" href="/jobs/<%=job._id%>/edit">Edit this job</a>
+    <form class="d-inline" action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
+      <button class="btn btn-danger"> Delete this job </button>
+    </form>
+  </div>
+</div>
+
+  

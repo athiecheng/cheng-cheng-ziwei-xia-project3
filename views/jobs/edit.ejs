@@ -1,32 +1,51 @@
 <% layout('layouts/boilerplate')%>
-    <h1>Edit Job</h1>
-    <form action="/jobs/<%=job._id%>?_method=PUT" method = "POST">
-       
-        <div>
-            <label for = "title">Job Title</label>
-            <input type="text" id = "title" name = "job [title]" value="<%=job.title%>">
-        </div>
+    
+    
 
-        <div>
-            <label for = "company">Company Name</label>
-            <input type="text" id = "company" name = "job [company]" value="<%=job.company%>" >
-        </div>
-
-        <div>
-            <label for = "location">Location</label>
-            <input type="text" id = "location" name = "job [location]" value="<%=job.location%>" >
-        </div>
-
-        <div>
-            <label for = "Contact Email">Contact Email</label>
-            <input type="text" id = "email" name = "job [email]" value="<%=job.email%>">
-        </div>
-
-        <div>
-            <label for = "Job description">Job Description</label>
-            <input type="text" id = "description" name = "job [description]" value="<%=job.description%>">
-        </div>
+    <div class="row">
+        <h1 class="text-center">Edit This Job</h1>
+        <div class="col-6 offset-3">
+            <form action="/jobs/<%=job._id%>?_method=PUT" method = "POST" novalidate class="validated-form">
+                <div class="mb-4">
+                    <label class="form-label" for = "title">Job Title</label>
+                    <input class="form-control" type="text" id = "title" name = "job[title]" value="<%=job.title%>" required>
+                </div>
         
-        <button>Update This Job</button>
-    </form>
-    <a href="/jobs/<%= job._id%>">Back to all jobs</a>
+                <div class="mb-4">
+                    <label class="form-label" for = "company">Company Name</label>
+                    <input class="form-control"  type="text" id = "company" name = "job[company]" value="<%=job.company%>" required>
+                </div>
+        
+                <div class="mb-4">
+                    <label class="form-label" for = "location">Location</label>
+                    <input class="form-control"  type="text" id = "location" name = "job[location]" value="<%=job.location%>" required>
+                </div>
+    
+                <div class="mb-4">
+                    <label class="form-label" for = "logo">company logo</label>
+                    <input class="form-control"  type="text" id = "logo" name = "job[logo]" value="<%=job.logo%>" required>
+                </div>
+        
+                <div class="mb-4">
+                    <label class="form-label" for = "Contact Email">Contact Email</label>
+                    <input class="form-control"  type="text" id = "email" name = "job[email]" value="<%=job.email%>" required>
+                </divclass="mb-4>
+
+                <div class="mb-4">
+                    <label class="form-label" for = "Posting Date">Posting Date</label>
+                    <input class="form-control"  type="number" id = "postingDate" name = "job[postingDate]" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+        
+                <div class="mb-4">
+                    <label class="form-label" for = "Job description">Job Description</label>
+                    <textarea class="form-control" type="text" id = "description" name = "job[description]" required><%= job.description%></textarea>
+                </div>
+              
+                <button class="btn btn-info">Save This Update</button>
+            </form>
+
+            <a href="/jobs/<%= job._id%>">Back to the jobs</a>
+            
+        </div>
+    </div>

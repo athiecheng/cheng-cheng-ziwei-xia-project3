@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsmate = require('ejs-mate');
+const catchAsync = require('./helpers/catchAsyncError');
 const methodOverride = require('method-override');
 const JobDetail = require('./models/jobDetails');
 
@@ -39,32 +40,36 @@ app.get('/jobs/new', async (req, res) => {
     res.render('jobs/new');
 });
 
-app.post('/jobs', async (req, res) => {
+app.post('/jobs', catchAsync(async (req, res, next) => {
     const job = new JobDetail(req.body.job);
     await job.save();
     res.redirect(`/jobs/${job._id}`)
-});
+}));
 
-app.get('/jobs/:id', async (req, res) => {
+app.get('/jobs/:id', catchAsync(async (req, res) => {
     const job = await JobDetail.findById(req.params.id)
     res.render('jobs/detail', {job})
-});
+}));
 
-app.get('/jobs/:id/edit', async (req, res) => {
+app.get('/jobs/:id/edit', catchAsync(async (req, res) => {
     const job = await JobDetail.findById(req.params.id)
     res.render('jobs/edit', {job})
-});
+}));
 
-app.put('/jobs/:id', async (req, res) => {
+app.put('/jobs/:id', catchAsync(async (req, res) => {
     const {id} = req.params;
     const job = await JobDetail.findByIdAndUpdate(id, {...req.body.job});
     res.redirect(`/jobs/${job._id}`)
-})
+}));
 
-app.delete('/jobs/:id', async (req, res) => {
+app.delete('/jobs/:id', catchAsync(async (req, res) => {
     const {id} = req.params;
     await JobDetail.findByIdAndDelete(id);
     res.redirect('/jobs')
+}));
+
+app.use((err, req, res, next) => {
+    res.send('something went wrong!')
 })
 
 app.listen(3000, ()=> {

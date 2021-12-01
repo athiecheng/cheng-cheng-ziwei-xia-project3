@@ -19,7 +19,8 @@ const seedDB = async () => {
         const random3 = Math.floor(Math.random() * 3);
         const job = new JobDetail({
             title: `${jobs[random3].title}`,
-            location: `${jobs[random3].location}`
+            location: `${jobs[random3].location}`,
+            image:'https://unsplash.com/collections/1117915'
         })
         await job.save();
     }
