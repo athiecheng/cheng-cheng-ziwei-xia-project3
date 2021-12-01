@@ -10,13 +10,28 @@
 <body> -->
 <% layout('layouts/boilerplate')%>
     <h1>All Jobs</h1>
-    <div>
-        <a href = "/jobs/new">Post a New Job</a>
-    </div>
-    <ul>
+    
+    
         <% for (let job of jobs) { %>
-            <li><a href = "/jobs/<%= job._id %>"><%= job.title +" " +job.location +"@"+ job.company %></a></li>
+            <div class="card" mb-3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <%= job.company%>
+                    </div>
+                    <div class="col-mg-8">
+                        <div class="card-body">
+                            <h4 class="card-title content-center">
+                                <%= job.title%>
+                            </h4>
+                            <p class="card-text">
+                                <%= job.location%>
+                            </p>
+                            <a class="btn btn-primary" href="jobs/<%=job._id%>"> View this job</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <% } %>
-    </ul>
+    
 <!-- </body>
 </html> -->

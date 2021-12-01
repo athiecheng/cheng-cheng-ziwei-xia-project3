@@ -1,33 +1,45 @@
 <% layout('layouts/boilerplate')%>
-    <form action="/jobs" method = "POST">
-        <div>
-            <label for = "title">Job Title</label>
-            <input type="text" id = "title" name = "job[title]">
-        </div>
+<div class="row">
+    <h1 class="text-center">New Job</h1>
+    <div class="col-6 offset-3">
+        <form action="/jobs" method = "POST">
+            <div class="mb-4">
+                <label class="form-label" for = "title">Job Title</label>
+                <input class="form-control" type="text" id = "title" name = "job[title]">
+            </div>
+    
+            <div class="mb-4">
+                <label class="form-label" for = "company">Company Name</label>
+                <input class="form-control"  type="text" id = "company" name = "job[company]">
+            </div>
+    
+            <div class="mb-4">
+                <label class="form-label" for = "location">Location</label>
+                <input class="form-control"  type="text" id = "location" name = "job[location]">
+            </div>
 
-        <div>
-            <label for = "company">Company Name</label>
-            <input type="text" id = "company" name = "job[company]">
-        </div>
+            <div class="mb-4">
+                <label class="form-label" for = "logo">company logo</label>
+                <input class="form-control"  type="text" id = "logo" name = "job[logo]">
+            </div>
+    
+            <div class="mb-4">
+                <label class="form-label" for = "Contact Email">Contact Email</label>
+                <input class="form-control"  type="text" id = "email" name = "job[email]">
+            </divclass="mb-4>
+    
+            <div class="mb-4">
+                <label class="form-label" for = "Job description">Job Description</label>
+                <textarea class="form-control" type="text" id = "description" name = "job[description]"></textarea>
+            </div>
+    
+            
+    
+          
+            <button class="btn btn-success">Post This Job</button>
+        </form>
+    </div>
+</div>
 
-        <div>
-            <label for = "location">Location</label>
-            <input type="text" id = "location" name = "job[location]">
-        </div>
-
-        <div>
-            <label for = "Contact Email">Contact Email</label>
-            <input type="text" id = "email" name = "job[email]">
-        </div>
-
-        <div>
-            <label for = "Job description">Job Description</label>
-            <input type="text" id = "description" name = "job[description]">
-        </div>
-
-        
-
-      
-        <button>Post This Job</button>
-    </form>
-    <a href="/jobs">All jobs</a>
+    
+    
