@@ -4,7 +4,7 @@ module.exports = [
         company: "Facebook",
         location: "Seattle",
         description: "asdoasdaosd asdiasd asdisab",
-        employerEmail: "sadssaxzc@gmail.com",
+        email: "sadssaxzc@gmail.com",
         postingDate: 2020, 
         favorited: 2
     },
@@ -13,7 +13,7 @@ module.exports = [
         company: "Amazon",
         location: "Seattle",
         description: "asdoasdaosd asdiasd asdisab",
-        employerEmail: "sadssaxzc@gmail.com",
+        email: "sadssaxzc@gmail.com",
         postingDate: 2021, 
         favorited: 3
     },
@@ -22,7 +22,7 @@ module.exports = [
         company: "Google",
         location: "CA",
         description: "asdoasdaosd asdiasd asdisab",
-        employerEmail: "sadssaxzc@gmail.com",
+        email: "sadssaxzc@gmail.com",
         postingDate: 2021, 
         favorited: 1
     }

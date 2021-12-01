@@ -67,6 +67,6 @@ app.delete('/jobs/:id', async (req, res) => {
     res.redirect('/jobs')
 })
 
-app.listen(3001, ()=> {
+app.listen(3000, ()=> {
     console.log('Serving on port 3000')
 })
