@@ -9,7 +9,11 @@ const JobDetailsSchema = new Schema({
     location: String,
     description: String,
     email: String,
-    postingDate: Number, 
+    website: String,
+    postingDate: {
+        type: Date,
+        default: Date.now,
+    }, 
     favorited: Number
 })
 

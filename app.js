@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsmate = require('ejs-mate');
+const {jobSchema} = require('./joiSchemas');
 const catchAsync = require('./helpers/catchAsyncError');
+const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
 const JobDetail = require('./models/jobDetails');
 
@@ -27,6 +29,17 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 
+//middleware to validate job
+const validateJob = (req, res, next) => {
+    const {error} = jobSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
 app.get('/', (req, res) =>{
     res.render('home')
 })
@@ -40,7 +53,8 @@ app.get('/jobs/new', async (req, res) => {
     res.render('jobs/new');
 });
 
-app.post('/jobs', catchAsync(async (req, res, next) => {
+app.post('/jobs', validateJob,catchAsync(async (req, res, next) => {
+    // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
     const job = new JobDetail(req.body.job);
     await job.save();
     res.redirect(`/jobs/${job._id}`)
@@ -56,7 +70,7 @@ app.get('/jobs/:id/edit', catchAsync(async (req, res) => {
     res.render('jobs/edit', {job})
 }));
 
-app.put('/jobs/:id', catchAsync(async (req, res) => {
+app.put('/jobs/:id', validateJob, catchAsync(async (req, res) => {
     const {id} = req.params;
     const job = await JobDetail.findByIdAndUpdate(id, {...req.body.job});
     res.redirect(`/jobs/${job._id}`)
@@ -68,8 +82,14 @@ app.delete('/jobs/:id', catchAsync(async (req, res) => {
     res.redirect('/jobs')
 }));
 
+app.all('*', (req, res, next)=> {
+    next(new ExpressError('Page Not Found', 404))
+})
+
 app.use((err, req, res, next) => {
-    res.send('something went wrong!')
+    const {statusCode = 500} = err;
+    if(!err.message) err.message = 'Something went wrong!'
+    res.status(statusCode).render('error', {err});
 })
 
 app.listen(3000, ()=> {
