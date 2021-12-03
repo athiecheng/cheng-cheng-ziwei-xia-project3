@@ -3,16 +3,14 @@
 <div class="card" >
   <img src="<%= job.logo%>" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title"> <%=job.title %></h5>
-    <p class="card-text"><%=job.description %></p>
+    <h5 class="card-title"> Job Title:  <%=job.title %></h5>
+    <li class="list-group-item text-muted">Location:  <%=job.location %></li>
+    <li class="list-group-item ">Company:  <%=job.company %></li> 
+    <a href ="mailto:<%=job.email %>">Contact Email Address:  <%=job.email %></a>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item text-muted"><%=job.location %></li>
-    <li class="list-group-item "><%=job.company %></li>
-    <li class="list-group-item "><%=job.email %></li>
-    <a href ="mailto:<%=job.email %>">send </a>
-    <li class="list-group-item "><%=job.postingDate %></li>
 
+  <ul class="list-group list-group-flush">
+    <p class="card-text">Description For The Role:   <%=job.description %></p>
   </ul>
 
   <div class="card-body">
@@ -20,6 +18,7 @@
     <form class="d-inline" action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
       <button class="btn btn-danger"> Delete this job </button>
     </form>
+    <li class="list-group-item "><%=job.postingDate %></li>
   </div>
 </div>
 
