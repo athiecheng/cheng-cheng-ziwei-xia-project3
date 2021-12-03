@@ -11,9 +11,9 @@ const Localcheck = require('passport-local');
 const User = require('./models/user');
 
 
-const userRoute = require('./route/user');
+const userRoute = require('./routes/user');
 
-const jobsRoutes = require('./routes/JobsRouters')
+const jobsRoutes = require('./routes/jobs')
 mongoose.connect('mongodb://localhost:27017/job-search', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -57,6 +57,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next)=> {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();

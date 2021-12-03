@@ -15,7 +15,7 @@ db.once("open", ()=> {
 
 const seedDB = async () => {
     await JobDetail.deleteMany({})
-    for(let i = 0; i < 50; i++){
+    for(let i = 0; i < 10; i++){
         const random3 = Math.floor(Math.random() * 3);
         const job = new JobDetail({
             title: `${jobs[random3].title}`,

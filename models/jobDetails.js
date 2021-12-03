@@ -10,6 +10,10 @@ const JobDetailsSchema = new Schema({
     description: String,
     email: String,
     website: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     postingDate: {
         type: Date,
         default: Date.now,
