@@ -4,18 +4,34 @@ const catchAsync = require('../helpers/catchAsyncError');
 const ExpressError = require('../helpers/ExpressError');
 const JobDetail = require('../models/jobDetails');
 
-router.get('/', async (req, res) => {
+const validateJob = (req, res, next) => {
+    const {error} = jobSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+router.get('/', catchAsync(async(req, res) => {
     const jobs = await JobDetail.find({});
     res.render('jobs/index', {jobs})
-})
+}));
 
-router.get('/new', async (req, res) => {
-    res.render('jobs/new');
+router.get('/new', (req, res) => {
+    if(!req.isAuthenticated()){
+        // console.log("not signin");
+        req.flash('error','need to be signin to post new jobs');
+        res.redirect('/login');
+    }
+        // console.log("signin");
+        res.render('jobs/new');
+    
+    
 });
 
 router.post('/', validateJob,catchAsync(async (req, res, next) => {
-    // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
-    const job = new JobDetail(req.body.job);
+    
     await job.save();
     res.redirect(`/jobs/${job._id}`)
 }));
