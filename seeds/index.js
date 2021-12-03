@@ -13,18 +13,19 @@ db.once("open", ()=> {
     console.log("Database connected");
 })
 
-const seedDB = async () => {
-    await JobDetail.deleteMany({})
-    for(let i = 0; i < 10; i++){
-        const random3 = Math.floor(Math.random() * 3);
-        const job = new JobDetail({
-            title: `${jobs[random3].title}`,
-            location: `${jobs[random3].location}`,
-            image:'https://unsplash.com/collections/1117915'
-        })
-        await job.save();
-    }
-}
+// const seedDB = async () => {
+//     await JobDetail.deleteMany({})
+//     for(let i = 0; i < 10; i++){
+//         const random3 = Math.floor(Math.random() * 3);
+//         const job = new JobDetail({
+//             author: '61aa84a23152e89228fb7b3c',
+//             title: `${jobs[random3].title}`,
+//             location: `${jobs[random3].location}`,
+//             image:'https://unsplash.com/collections/1117915'
+//         })
+//         await job.save();
+//     }
+// }
 
 seedDB().then(()=> {
     mongoose.connection.close();

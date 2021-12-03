@@ -6,20 +6,24 @@
     <h5 class="card-title"> Job Title:  <%=job.title %></h5>
     <li class="list-group-item text-muted">Location:  <%=job.location %></li>
     <li class="list-group-item ">Company:  <%=job.company %></li> 
-    <a href ="mailto:<%=job.email %>">Contact Email Address:  <%=job.email %></a>
+    <li class="list-group-item ">
+      <a href ="mailto:<%=job.email %>">Contact Email Address:  <%=job.email %></a>
+    </li>
+    <li class="list-group-item ">
+      <p class="card-text">Description For The Role:   <%=job.description %></p>
+    </li>
+    <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
   </div>
 
-  <ul class="list-group list-group-flush">
-    <p class="card-text">Description For The Role:   <%=job.description %></p>
-  </ul>
-
-  <div class="card-body">
-    <a class="card-link btn btn-warning" href="/jobs/<%=job._id%>/edit">Edit this job</a>
-    <form class="d-inline" action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
-      <button class="btn btn-danger"> Delete this job </button>
-    </form>
-    <li class="list-group-item "><%=job.postingDate %></li>
-  </div>
+  <% if(currentUser && job.author.equals(currentUser._id)) {%>
+    <div class="card-body">
+      <a class="card-link btn btn-warning" href="/jobs/<%=job._id%>/edit">Edit this job</a>
+      <form class="d-inline" action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger"> Delete this job </button>
+      </form>
+      <li class="list-group-item "><%=job.postingDate %></li>
+    </div>
+  <% }%>
 </div>
 
   
