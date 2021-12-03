@@ -16,10 +16,19 @@
             <a class="nav-link" href="/jobs/new">Post New Job</a>
             
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
+          
         </ul>
+        <div class="navbar-nav ms-auto">
+          <% if(! currentUser) {%>
+          
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Register</a>
+          
+          <%} else {%>}
+          <a class="text" ><%=currentUser.username%></a>
+          <a class="nav-link" href="/logout">Logout</a>
+          <%}%>
+        </div>
       </div>
     </div>
   </nav>

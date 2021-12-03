@@ -13,8 +13,12 @@ router.post('/register', catchAsync(async (req,res)=>{
         const {email, username, password} = req.body;
         const user = new User({email, username});
         const regUser = await User.register(user,password);
-        req.flash('success','Welcome to your job board account');
-        res.redirect('/jobs');
+        req.login(regUser, err => {
+            if(err) return next(err);
+            req.flash('success','Welcome to your job board account');
+            res.redirect('/jobs');
+        })
+        
 
     }catch (e){
         console.log("sssss")
@@ -32,8 +36,16 @@ router.get('/login',(req,res)=>{
 
 router.post('/login',passport.authenticate('local',{failureFlash: true,failureRedirect:'/login'}),(req,res)=>{
     req.flash('success','Welcome Back');
-    res.redirect('/jobs');
+    const lastpage = req.session.returnTo || '/jobs';
+    delete req.session.returnTo;
+    res.redirect(lastpage);
 
 });
+
+router.get('/logout',(req,res)=>{
+    req.logout();
+    req.flash('success',"logout succeed!");
+    res.redirect('/jobs');
+})
 
 module.exports = router;
