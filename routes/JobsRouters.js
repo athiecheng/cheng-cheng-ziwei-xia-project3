@@ -4,6 +4,7 @@ const catchAsync = require('../helpers/catchAsyncError');
 const ExpressError = require('../helpers/ExpressError');
 const JobDetail = require('../models/jobDetails');
 const {jobSchema} = require('../joiSchemas');
+
 //middleware to validate job
 const validateJob = (req, res, next) => {
     const {error} = jobSchema.validate(req.body);
