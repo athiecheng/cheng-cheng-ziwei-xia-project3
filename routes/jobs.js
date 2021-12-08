@@ -3,7 +3,7 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsyncError');
 const JobDetail = require('../models/jobDetails');
 const {isLoggedIn, isAuthor, validateJob} = require('../middleware');
-const user = require('../models/user');
+const User = require('../models/user');
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -23,7 +23,7 @@ router.get("/", function(req, res){
               if(allJobs.length < 1) {
                   noMatch = "No jobs match that query, please try again.";
               }
-              console.log(allJobs);
+              
               res.render("jobs/index",{Jobdetails:allJobs, noMatch: noMatch});
            }
         });
@@ -34,7 +34,7 @@ router.get("/", function(req, res){
            if(err){
                console.log(err);
            } else {
-            console.log(allJobs +"lllll");
+            
               res.render("jobs/index",{Jobdetails:allJobs, noMatch: noMatch});
            }
         });
@@ -60,17 +60,22 @@ router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
 router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
     const{id} = req.params;
-    const{user} = await User.findById(req.params.id);
-    if (user.favjob.includes(id)){
-        user.favjob.delete(id)
-    }else{
+    const userId = req.user._id;
+    const user = await User.findById(userId)
+    
+    // console.log(req.user._id+"kkkkkk");
+    console.log(Array.isArray(req.user.favjob));
+    // if (user.favjob.includes(id)){
+    //     user.favjob.delete(id)
+    // }else{
+    
         user.favjob.push(id)
-    }
+    // }
 }));
 
 router.get('/:id', catchAsync(async (req, res) => {
     const job = await JobDetail.findById(req.params.id).populate('author');
-    console.log(job);
+    // console.log(job);
     res.render('jobs/detail', {job});
 }));
 
@@ -87,7 +92,6 @@ router.get('/:id/edit', isLoggedIn,isAuthor,catchAsync(async (req, res) => {
 
 router.put('/:id', isLoggedIn, isAuthor, validateJob, catchAsync(async (req, res) => {
     const { id } = req.params;
-    //const {id} = req.params;
     const job = await JobDetail.findByIdAndUpdate(id, {...req.body.job});
     req.flash('sucess', 'Successfully edit a job!');
     res.redirect(`/jobs/${job._id}`)
