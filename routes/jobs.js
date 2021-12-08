@@ -3,12 +3,44 @@ const router = express.Router();
 const catchAsync = require('../helpers/catchAsyncError');
 const JobDetail = require('../models/jobDetails');
 const {isLoggedIn, isAuthor, validateJob} = require('../middleware');
+const user = require('../models/user');
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 
-router.get('/', catchAsync(async(req, res) => {
-    const jobs = await JobDetail.find({});
-    res.render('jobs/index', {jobs})
-}));
+
+router.get("/", function(req, res){
+    var noMatch = null;
+    if(req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        
+        JobDetail.find({company: regex}, function(err, allJobs){
+           if(err){
+               console.log(err);
+           } else {
+              if(allJobs.length < 1) {
+                  noMatch = "No jobs match that query, please try again.";
+              }
+              console.log(allJobs);
+              res.render("jobs/index",{Jobdetails:allJobs, noMatch: noMatch});
+           }
+        });
+    } else {
+        
+        JobDetail.find({}, function(err, allJobs){
+        
+           if(err){
+               console.log(err);
+           } else {
+            console.log(allJobs +"lllll");
+              res.render("jobs/index",{Jobdetails:allJobs, noMatch: noMatch});
+           }
+        });
+    }
+});
+
 
 router.get('/new', isLoggedIn,(req, res) => {
     res.render('jobs/new');
@@ -21,6 +53,17 @@ router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
     await job.save();
     req.flash('sucess', 'Successfully post a job!');
     res.redirect(`/jobs/${job._id}`)
+}));
+
+router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
+    // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
+    const{id} = req.params;
+    const user = req.user._id;
+    if (user.favjob.includes(id)){
+        user.favjob.delete(id)
+    }else{
+        user.favjob.push(id)
+    }
 }));
 
 router.get('/:id', catchAsync(async (req, res) => {

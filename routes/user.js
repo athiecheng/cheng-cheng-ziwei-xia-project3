@@ -36,7 +36,6 @@ router.post('/login',passport.authenticate('local',{failureFlash: true,failureRe
     const lastpage = req.session.returnTo || '/jobs';
     delete req.session.returnTo;
     res.redirect(lastpage);
-
 });
 
 router.get('/logout',(req,res)=>{
@@ -45,16 +44,11 @@ router.get('/logout',(req,res)=>{
     res.redirect('/jobs');
 })
 
-router.get('/favorite', catchAsync(async(req, res) => {
-    console.log(req.user.favorite)
-    res.render('users/fav')
+router.get('/fav', catchAsync(async(req, res) => {
+    // const jobs = await JobDetail.find({});
+    // const{user} = await User.findById(req.params.id);
+
+    res.render('users/fav');
 }));
-
-router.post('/favorite', catchAsync(async(req, res) => {
-    const job = new jobDetails()
-    res.render('users/fav')
-}));
-
-
 
 module.exports = router;

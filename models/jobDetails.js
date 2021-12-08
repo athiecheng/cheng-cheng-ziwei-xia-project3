@@ -17,8 +17,7 @@ const JobDetailsSchema = new Schema({
     postingDate: {
         type: Date,
         default: Date.now,
-    }, 
-    favorited: Number
+    }
 })
 
 module.exports = mongoose.model('JobDetail', JobDetailsSchema)
