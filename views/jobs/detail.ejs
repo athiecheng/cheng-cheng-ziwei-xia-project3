@@ -13,15 +13,28 @@
       <p class="card-text">Description For The Role:   <%=job.description %></p>
     </li>
     <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
+
+    <form action="/jobs/<%=job._id%>?_method=PUT" method = "POST"></form>
+    <!-- <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        add to favorite
+      </label>
+    </div> -->
+    <button class="btn btn-success">add to favorite</button>
+    </form>
   </div>
 
   <% if(currentUser && job.author.equals(currentUser._id)) {%>
     <div class="card-body">
       <a class="card-link btn btn-warning" href="/jobs/<%=job._id%>/edit">Edit this job</a>
+
       <form class="d-inline" action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
         <button class="btn btn-danger"> Delete this job </button>
       </form>
+      
       <li class="list-group-item "><%=job.postingDate %></li>
+      
     </div>
   <% }%>
 </div>

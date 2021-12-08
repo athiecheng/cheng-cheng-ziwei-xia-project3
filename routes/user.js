@@ -4,6 +4,7 @@ const catchAsync = require('../helpers/catchAsyncError');
 const passport = require('passport');
 
 const User = require('../models/user');
+const jobDetails = require('../models/jobDetails');
 
 router.get('/register',(req,res)=>{
     res.render('users/register');
@@ -18,16 +19,12 @@ router.post('/register', catchAsync(async (req,res)=>{
             req.flash('success','Welcome to your job board account');
             res.redirect('/jobs');
         })
-        
 
     }catch (e){
 
         req.flash('error', e.message);
         res.redirect('register');
-    }
-    
-
-    
+    }    
 }));
 
 router.get('/login',(req,res)=>{
@@ -47,5 +44,17 @@ router.get('/logout',(req,res)=>{
     req.flash('success',"logout succeed!");
     res.redirect('/jobs');
 })
+
+router.get('/favorite', catchAsync(async(req, res) => {
+    console.log(req.user.favorite)
+    res.render('users/fav')
+}));
+
+router.post('/favorite', catchAsync(async(req, res) => {
+    const job = new jobDetails()
+    res.render('users/fav')
+}));
+
+
 
 module.exports = router;

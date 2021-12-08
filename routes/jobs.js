@@ -11,13 +11,11 @@ router.get('/', catchAsync(async(req, res) => {
 }));
 
 router.get('/new', isLoggedIn,(req, res) => {
-    
     res.render('jobs/new');
 });
 
 router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
-    
     const job = new JobDetail(req.body.job);
     job.author = req.user._id;
     await job.save();
@@ -38,7 +36,6 @@ router.get('/:id/edit', isLoggedIn,isAuthor,catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find the job!');
         return res.redirect('/jobs');
     }
-
     res.render('jobs/edit', {job})
 }));
 
