@@ -48,4 +48,11 @@ router.get('/logout',(req,res)=>{
     res.redirect('/jobs');
 })
 
+router.get('/fav', catchAsync(async(req, res) => {
+    // const jobs = await JobDetail.find({});
+    // const{user} = await User.findById(req.params.id);
+
+    res.render('users/fav');
+}));
+
 module.exports = router;
