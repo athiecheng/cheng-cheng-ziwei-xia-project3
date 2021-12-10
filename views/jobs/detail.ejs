@@ -1,6 +1,14 @@
 <% layout('layouts/boilerplate')%>
 
-
+<% function containsObject(obj, list) { %>
+  <% var i;%>
+  <% for (i = 0; i < list.length; i++) {%>
+    <% if (list[i]._id.equals(obj._id)) {%>
+      <% return true;%>
+      <% }%>
+      <% }%>
+      <% return false;%>
+      <% }%>
 
 <div class="card" >
   <img src="<%= job.logo%>" class="card-img-top" alt="...">
@@ -15,17 +23,18 @@
       <p class="card-text">Description For The Role:   <%=job.description %></p>
     </li>
     <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
-    
+    <li class="list-group-item ">
     <form action="/jobs/<%=job._id%>" method = "POST">
     
       <div class="form-check">
-        <input class="form-check-input" type="submit" value="" id="flexCheckChecked" checked>
-        <label class="form-check-label" for="flexCheckChecked">
-          Like this Job
-        </label>
-
+        <% if(containsObject(job, currentUser.favjob)) { %>
+        <button type="button" class="btn btn-sm btn-primary" disabled>job liked</button>
+        <% } else { %>
+        <button onclick="this.form.submit(); this.disabled = true; this.innerText = 'job liked'" type="submit" class="btn btn-sm btn-primary">like this job</button>
+        <% } %>
       </div>
     </form>
+  </li>
   </div>
 
  
