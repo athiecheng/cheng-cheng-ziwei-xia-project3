@@ -8,7 +8,7 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    favorite: []
+    favjob: [Object]
 })
 
 UserSchema.plugin(passportlocalmongoose);
