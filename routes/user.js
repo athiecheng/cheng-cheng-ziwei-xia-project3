@@ -49,7 +49,7 @@ router.get('/fav', catchAsync(async(req, res) => {
     // const{user} = await User.findById(req.params.id);
     const userId = req.user._id;
     const user = await User.findById(userId);
-    console.log(user + " user")
+    // console.log(user + " user")
     const favJobs = user.favjob;
     //console.log(favJobs + " this is favJobs from user.js")
     res.render('users/fav', {favJobs});

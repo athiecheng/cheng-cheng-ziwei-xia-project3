@@ -63,7 +63,7 @@ router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
             console.log(err);
         }
     })
-    console.log(user.favjob)
+    
     // res.redirect('/fav')
     // if (user.favjob.includes(id)){
     //     user.favjob.delete(id)
