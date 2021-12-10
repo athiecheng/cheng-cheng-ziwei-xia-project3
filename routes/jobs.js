@@ -61,7 +61,7 @@ router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
     const{id} = req.params;
     const userId = req.user._id;
-    const user = await User.findById(userId)
+    // const user = await User.findById(userId)
     
     // console.log(req.user._id+"kkkkkk");
     console.log(Array.isArray(req.user.favjob));
@@ -69,7 +69,7 @@ router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
     //     user.favjob.delete(id)
     // }else{
     
-        user.favjob.push(id)
+        // user.favjob.push(id)
     // }
 }));
 
