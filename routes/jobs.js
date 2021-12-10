@@ -9,8 +9,6 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
-
-
 router.get("/", function(req, res){
     var noMatch = null;
     if(req.query.search) {
@@ -43,13 +41,11 @@ router.get("/", function(req, res){
 
 
 router.get('/new', isLoggedIn,(req, res) => {
-    
     res.render('jobs/new');
 });
 
 router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
-    
     const job = new JobDetail(req.body.job);
     job.author = req.user._id;
     await job.save();
@@ -60,22 +56,25 @@ router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
 router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
     const{id} = req.params;
+    const job = await JobDetail.findById(id);
     const userId = req.user._id;
-    // const user = await User.findById(userId)
-    
-    // console.log(req.user._id+"kkkkkk");
-    console.log(Array.isArray(req.user.favjob));
+    const user = await User.findByIdAndUpdate(userId, {
+        "$push": {"favjob": job}, function(err) {
+            console.log(err);
+        }
+    })
+    console.log(user.favjob)
+    // res.redirect('/fav')
     // if (user.favjob.includes(id)){
     //     user.favjob.delete(id)
     // }else{
     
-        // user.favjob.push(id)
+        //user.favjob.push(id)
     // }
 }));
 
 router.get('/:id', catchAsync(async (req, res) => {
     const job = await JobDetail.findById(req.params.id).populate('author');
-    // console.log(job);
     res.render('jobs/detail', {job});
 }));
 
@@ -86,7 +85,6 @@ router.get('/:id/edit', isLoggedIn,isAuthor,catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find the job!');
         return res.redirect('/jobs');
     }
-
     res.render('jobs/edit', {job})
 }));
 
