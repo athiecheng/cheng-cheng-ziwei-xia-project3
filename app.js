@@ -48,7 +48,6 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash());
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new Localcheck(User.authenticate()));
@@ -56,10 +55,12 @@ passport.use(new Localcheck(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
 app.use((req, res, next)=> {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.path_name = req.originalUrl;
     next();
 })
 
@@ -68,7 +69,7 @@ app.use('/',userRoute);
 app.use('/jobs', jobsRoutes)
 
 app.get('/', (req, res) =>{
-    res.render('home')
+    res.render('home', {path_name : 'home'})
 })
 
 app.all('*', (req, res, next)=> {

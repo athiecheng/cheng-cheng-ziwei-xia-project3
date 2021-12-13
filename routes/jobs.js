@@ -22,7 +22,11 @@ router.get("/", function(req, res){
                   noMatch = "No jobs match that query, please try again.";
               }
               
-              res.render("jobs/index",{Jobdetails:allJobs, noMatch: noMatch});
+              res.render("jobs/index",{
+                Jobdetails:allJobs, 
+                noMatch: noMatch,
+                path_name: 'home'
+                });
            }
         });
     } else {
