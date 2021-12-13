@@ -1,25 +1,35 @@
 <% layout('layouts/boilerplate')%>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Own Job Board</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link rel="stylesheet" href="/home.css">
+</head>
 
 <body class="d-flex text-center text-white bg-dark">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       
-      <main class="px-3">
+      <main class="web-name">
           <h1>Job Board</h1>
-          <p class="lead"> Welcome to our job board! </p>
-          <a href="/jobs" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
-              Jobs</a>
       </main>
+      <div class="details">
+        <p class="lead"> Welcome to our job board! </p>
+      </div>
 
   </div>
 
   <p>
+    <div class="form-center">
     <form action="/jobs" method="GET" class="form-inline">
         <div class="">
             <input type="test" name="search" placeholder="Job search..." class="form-contro">
             <input type="submit" value="Search" class="btn btn-info">
         </div>
     </form>
+  </div>
 </p>
 
 

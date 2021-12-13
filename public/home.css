@@ -1,14 +1,14 @@
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://d3iouj7udfksni.cloudfront.net/static/home/img/post-job-network.png");
+        url("https://thumbs.dreamstime.com/b/conceptual-hand-writing-showing-re-hiring-concept-meaning-advertising-employment-workforce-placement-new-job-female-human-wear-161383203.jpg"); 
     background-size: cover;
     background-position: center;
-    /* text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5); */
+    text-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.7);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 .cover-container {
-  max-width: 60vw;
+  max-width: 100vw;
 }
 
 .nav-link {
@@ -20,18 +20,43 @@ body {
 }
 
 .nav-link:hover{
-    color: rgba(255,255,255,0.5);
-    border-bottom-color:rgba(255,255,255,0.5);
+    color: white;
+    border-bottom-color:white;
 }
 
 .nav-link.active {
-    color: white;
-    border-bottom-color:white;
+    color: green;
+    border-bottom-color:blue;
 
 }
 
 .btn-secondary, .btn-secondary:hover{
     color: #333;
     text-shadow: none;
+}
+
+.form-center, .details{
+	display:flex;
+	justify-content: center;
+    margin-top: -10pt;
+    
+}
+
+.web-name{
+    display:flex;
+	justify-content: center;
+    text-decoration: wavy;
+    text-rendering:optimizeLegibility;
+    color: beige;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    margin-top: 125pt;
+}
+
+.details{
+    display:flex;
+	justify-content: center;
+    color: paleturquoise;
+    
 }
 

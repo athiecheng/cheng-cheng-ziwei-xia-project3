@@ -23,7 +23,7 @@
       <p class="card-text">Description For The Role:   <%=job.description %></p>
     </li>
     <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
-    <li class="list-group-item "><%=job.postingDate %></li>
+    <li class="list-group-item "><%=job.postingDate.toLocaleDateString() %></li>
     <% if(currentUser && job.author.equals(currentUser._id)) {%>
     <li class="list-group-item ">
     
