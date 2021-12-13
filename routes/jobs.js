@@ -101,4 +101,11 @@ router.delete('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     res.redirect('/jobs')
 }));
 
+router.delete('/fav', isLoggedIn, catchAsync(async (req, res) => {
+    console.log("catcat");
+    const {id} = req.params;
+    await favjob.findByIdAndDelete(id);
+    
+}));
+
 module.exports = router;

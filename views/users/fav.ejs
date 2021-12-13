@@ -17,6 +17,13 @@
                        <%= job.location%>
                    </p>
                    <a class="btn btn-primary" href="jobs/<%=job._id%>"> View this job</a>
+
+
+                   <form class="d-inline" action="/fav" method="DELETE">
+                    <button class="btn btn-danger"> Delete this job </button>
+                  </form>
+
+
                </div>
            </div>
        </div>
