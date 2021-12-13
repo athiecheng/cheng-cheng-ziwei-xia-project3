@@ -55,4 +55,6 @@ router.get('/fav', catchAsync(async(req, res) => {
     res.render('users/fav', {favJobs});
 }));
 
+
+
 module.exports = router;

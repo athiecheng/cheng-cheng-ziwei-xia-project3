@@ -25,7 +25,6 @@
     <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
     <li class="list-group-item ">
     <form action="/jobs/<%=job._id%>" method = "POST">
-    
       <div class="form-check">
         <% if(containsObject(job, currentUser.favjob)) { %>
         <button type="button" class="btn btn-sm btn-primary" disabled>job liked</button>
@@ -36,8 +35,6 @@
     </form>
   </li>
   </div>
-
- 
 
   <% if(currentUser && job.author.equals(currentUser._id)) {%>
     <div class="card-body">
