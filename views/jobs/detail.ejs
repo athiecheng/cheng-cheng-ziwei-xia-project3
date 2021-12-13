@@ -23,9 +23,15 @@
       <p class="card-text">Description For The Role:   <%=job.description %></p>
     </li>
     <li class="list-group-item ">Posted by:  <%=job.author.username %></li> 
+    <li class="list-group-item "><%=job.postingDate %></li>
+    <% if(currentUser && job.author.equals(currentUser._id)) {%>
     <li class="list-group-item ">
-    <form action="/jobs/<%=job._id%>" method = "POST">
+    
+    
+      <form action="/jobs/<%=job._id%>" method = "POST">
+    
       <div class="form-check">
+      
         <% if(containsObject(job, currentUser.favjob)) { %>
         <button type="button" class="btn btn-sm btn-primary" disabled>job liked</button>
         <% } else { %>
@@ -34,6 +40,7 @@
       </div>
     </form>
   </li>
+  <% } %>
   </div>
 
   <% if(currentUser && job.author.equals(currentUser._id)) {%>
@@ -44,7 +51,7 @@
         <button class="btn btn-danger"> Delete this job </button>
       </form>
       
-      <li class="list-group-item "><%=job.postingDate %></li>
+      
       
     </div>
   <% }%>

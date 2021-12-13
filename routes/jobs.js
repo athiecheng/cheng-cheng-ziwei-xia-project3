@@ -53,24 +53,6 @@ router.post('/',isLoggedIn, validateJob,catchAsync(async (req, res, next) => {
     res.redirect(`/jobs/${job._id}`)
 }));
 
-router.get('/fav/:id', isLoggedIn, catchAsync(async (req, res) => {
-    const job = await JobDetail.findById(req.params.id).populate('author');
-    res.render('jobs/detail', {job});
-}));
-
-router.delete('/fav/:id',catchAsync(async (req, res) => {
-    const {id} = req.params.id;
-    const job = await JobDetail.findById(id);
-    const userId = req.user._id;
-    console.log(userId + "userId aaaaaaaaaaaa")
-    const user = await User.findByIdAndUpdate(userId, {
-        "$pullAll": {"favjob": [job]}, function(err) {
-            console.log(err);
-        }
-    }) 
-    res.redirect('/fav')
-}));
-
 router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
     // if (!req.body.job) throw new ExpressError('Invalid job data', 400);
     const{id} = req.params;
@@ -81,14 +63,6 @@ router.post('/:id',isLoggedIn, catchAsync(async (req, res, next) => {
             console.log(err);
         }
     })
-    
-    // res.redirect('/fav')
-    // if (user.favjob.includes(id)){
-    //     user.favjob.delete(id)
-    // }else{
-    
-        //user.favjob.push(id)
-    // }
 }));
 
 router.get('/:id', catchAsync(async (req, res) => {
@@ -119,5 +93,11 @@ router.delete('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     res.redirect('/jobs')
 }));
 
+router.delete('/fav', isLoggedIn, catchAsync(async (req, res) => {
+    console.log("catcat");
+    const {id} = req.params;
+    await favjob.findByIdAndDelete(id);
+    
+}));
 
 module.exports = router;
