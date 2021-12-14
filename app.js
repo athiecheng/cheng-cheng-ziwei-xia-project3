@@ -1,6 +1,5 @@
 if (process.env.NODE_ENV !== "production"){
-    require('dotenv').config();
-    
+    require('dotenv').config();   
 }
 
 const express = require('express');
@@ -15,7 +14,7 @@ const passport = require('passport');
 const Localcheck = require('passport-local');
 const User = require('./models/user');
 const port = process.env.PORT || 3000
-const mongoDBEndpoint = "mongodb+srv://cheng_berry:Yangwawa1010!@project3.v6vua.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongoDBEndpoint = process.env.DB_URL;
 
 mongoose.connect(mongoDBEndpoint,{
     useNewUrlParser: true,
