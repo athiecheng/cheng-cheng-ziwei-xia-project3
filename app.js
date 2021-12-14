@@ -10,12 +10,13 @@ const passport = require('passport');
 const Localcheck = require('passport-local');
 const User = require('./models/user');
 const port = process.env.PORT || 3000
+const mongoDBEndpoint = process.env.MONGODB_URI || 'mongodb://localhost:27017/job-search';
 
 
 const userRoute = require('./routes/user');
 
 const jobsRoutes = require('./routes/jobs')
-mongoose.connect('mongodb://localhost:27017/job-search', {
+mongoose.connect(mongoDBEndpoint, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
