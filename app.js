@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const Localcheck = require('passport-local');
 const User = require('./models/user');
+const port = process.env.PORT || 3000
 
 
 const userRoute = require('./routes/user');
@@ -82,6 +83,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', {err});
 })
 
-app.listen(3000, ()=> {
+app.listen(port, ()=> {
     console.log('Serving on port 3000')
 })
