@@ -24,11 +24,11 @@ body {
     border-bottom-color:white;
 }
 
-.nav-link.active {
+/* .nav-link.active {
     color: green;
     border-bottom-color:blue;
 
-}
+} */
 
 .btn-secondary, .btn-secondary:hover{
     color: #333;

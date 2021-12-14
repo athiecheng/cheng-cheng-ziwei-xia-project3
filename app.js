@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+    
+}
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -9,18 +14,22 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const Localcheck = require('passport-local');
 const User = require('./models/user');
-const port = process.env.PORT || 3000
-const mongoDBEndpoint = process.env.MONGODB_URI || 'mongodb://localhost:27017/job-search';
+// const port = process.env.PORT || 3000
+const mongoDBEndpoint = 'mongodb+srv://firstuser:firstuser@project3.v6vua.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 
+mongoose.connect(mongoDBEndpoint,{
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology: true,
+    // useFindAndModify: false
+
+});
 
 const userRoute = require('./routes/user');
 
 const jobsRoutes = require('./routes/jobs')
-mongoose.connect(mongoDBEndpoint, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -33,7 +42,7 @@ const app = express();
 
 app.engine('ejs',ejsmate);
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({extended: true}))
@@ -85,6 +94,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', {err});
 })
 
-app.listen(port, ()=> {
-    console.log('Serving on port 3000')
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })
