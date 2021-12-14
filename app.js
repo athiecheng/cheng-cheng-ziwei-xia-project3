@@ -14,9 +14,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const Localcheck = require('passport-local');
 const User = require('./models/user');
-// const port = process.env.PORT || 3000
-const mongoDBEndpoint = 'mongodb+srv://firstuser:firstuser@project3.v6vua.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
+const port = process.env.PORT || 3000
+const mongoDBEndpoint = "mongodb+srv://cheng_berry:Yangwawa1010!@project3.v6vua.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose.connect(mongoDBEndpoint,{
     useNewUrlParser: true,
