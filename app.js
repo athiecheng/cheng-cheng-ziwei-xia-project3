@@ -11,7 +11,7 @@ const Localcheck = require('passport-local');
 const User = require('./models/user');
 const port = process.env.PORT || 3000
 const mongoDBEndpoint = process.env.MONGODB_URI || 'mongodb://localhost:27017/job-search';
-
+const MongoStore = require('connect-mongo');
 
 const userRoute = require('./routes/user');
 
@@ -48,7 +48,9 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
-app.use(session(sessionConfig))
+app.use(session({secret: "SUPER_DUPER_SECRET",
+    store: MongoStore.create({ mongoUrl: mongoDBEndpoint }),
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
